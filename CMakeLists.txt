@@ -1,0 +1,57 @@
+###############################################################################
+# Copyright (c) 2011 Evgeny Proydakov <lord.tiran@gmail.com>
+###############################################################################
+
+CMAKE_MINIMUM_REQUIRED(VERSION 2.6.0)
+
+PROJECT(stage_sample)
+MESSAGE(STATUS "CREATE  STAGE  SAMPLE\n")
+
+# work with cmake
+SET(CMAKE_MODULE_PATH ${PROJECT_SOURCE_DIR}/Cmake ${CMAKE_MODULE_PATH})
+
+# temp setting
+IF(NOT CMAKE_BUILD_TYPE)
+    SET(CMAKE_BUILD_TYPE Debug)
+ENDIF(NOT CMAKE_BUILD_TYPE)
+
+# build libraries type
+IF(NOT BUILD_SHARED_LIBS)
+    set(BUILD_SHARED_LIBS ON)
+ENDIF(NOT BUILD_SHARED_LIBS)
+
+SET(LIBRARY_OUTPUT_PATH ${PROJECT_SOURCE_DIR}/build)
+SET(EXECUTABLE_OUTPUT_PATH ${PROJECT_SOURCE_DIR}/build)
+
+INCLUDE_DIRECTORIES(${CMAKE_CURRENT_SOURCE_DIR})
+
+SET(PLAYER_INCLUDE_DIRS $ENV{PLAYER_INCLUDE_DIRS})
+SET(PLAYER_LIBRARY_PATH $ENV{PLAYER_LIBRARY_PATH})
+
+# find player library
+FIND_LIBRARY(PLAYER_LIBRARY playerc++ ${PLAYER_LIBRARY_PATH})
+FIND_PATH(PLAYER_DIRECTORY libplayerc++ ${PLAYER_INCLUDE_DIRS})
+INCLUDE_DIRECTORIES(${PLAYER_INCLUDE_DIRS})
+INCLUDE_DIRECTORIES(${PLAYER_DIRECTORY})
+
+FIND_PACKAGE(Qt4 COMPONENTS QtCore QtGui REQUIRED)
+INCLUDE(${QT_USE_FILE})
+
+SET(PLAYER_POLYGON_WORLD_FILES)
+SET(WORLD_PATH ${PROJECT_SOURCE_DIR}/World)
+ADD_SUBDIRECTORY(${WORLD_PATH})
+
+CONFIGURE_FILE(${CMAKE_MODULE_PATH}/player.config.h.cmake ${PROJECT_SOURCE_DIR}/v_player_config.h)
+
+SET(HEADER_FILES
+	v_testing_robot_facade.h
+        v_player_config.h
+        v_player_process.h)
+
+SET(SOURCE_FILES
+	v_testing_robot_facade.cpp
+        main.cpp)
+
+ADD_EXECUTABLE(v_stage_sample ${SOURCE_FILES} ${HEADER_FILES} ${PLAYER_POLYGON_WORLD_FILES})
+TARGET_LINK_LIBRARIES(v_stage_sample ${QT_LIBRARIES})
+TARGET_LINK_LIBRARIES(v_stage_sample ${PLAYER_LIBRARY})

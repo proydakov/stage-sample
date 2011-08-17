@@ -1,0 +1,50 @@
+###############################################################################
+# Copyright (c) 2011 Evgeny Proydakov <lord.tiran@gmail.com>
+###############################################################################
+
+include "polygon.inc"
+include "robot.inc"
+
+# configure the GUI window
+window
+(
+size [ 700.000 700.000 ]
+
+    # camera options
+    center [ 0 0 ]
+    rotate [ 0 0 ]
+    scale 50
+
+    # GUI options
+    show_data 1
+    show_flags 1
+    show_blocks 1
+    show_clock 1
+    show_footprints 0
+    show_grid 1
+    show_trailarrows 0
+    show_trailrise 0
+    show_trailfast 0
+    show_occupancy 0
+    show_tree 0
+    pcam_on 0
+    screenshots 0
+)
+
+# add robot object
+robot
+(
+    name "actor"
+    pose [ 6 0 0 0 ]
+    mass 10.0
+    gui_move 1
+)
+
+# add map object
+polygon
+(
+    name "polygon"
+    size [100.000 100.000 0.800]
+    pose [0 0 0 0]
+    bitmap "polygon.png"
+)

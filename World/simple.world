@@ -1,0 +1,103 @@
+###############################################################################
+# Copyright (c) 2011 Evgeny Proydakov <lord.tiran@gmail.com>
+###############################################################################
+
+# configure the GUI window  # так ставятся комментарии 
+window  # этим ключевым словом описывается окно
+(
+size [ 700.000 700.000 ]  # размер поля
+
+    # camera options  # настройки камеры 
+    center [ 0 0 ]
+    rotate [ 0 0 ]
+    scale 50
+
+    # GUI options  # вспомогательные настройки: сетка, часы итд
+    show_data 1
+    show_flags 1
+    show_blocks 1
+    show_clock 1
+    show_footprints 0
+    show_grid 1
+    show_trailarrows 0
+    show_trailrise 0
+    show_trailfast 0
+    show_occupancy 0
+    show_tree 0
+    pcam_on 0
+    screenshots 0
+)
+
+define robot position  # директивой define мы объявляем объект robot производный от position базового объекта предназначенного для моделировани движущихся моделей
+(
+    # actual size # описываем актуальный размер
+    size [ 0.5 0.5 0.5 ]
+    # centre of rotation offset
+    origin [ 0 0 0 90 ]
+
+    # positonal things
+    drive "diff"
+
+    # the shape of the robot # форму робота
+    block
+    (
+        points 6
+        point[5] [ -4  0 ]
+        point[4] [ -4  -2.8 ]
+        point[3] [ -2  -4 ]
+        point[2] [ 2   -4 ]
+        point[1] [ 4  -2.8 ]
+        point[0] [ 4  0 ]
+
+        z [ 0  1 ]
+
+	color "orange"
+    )
+    block
+    (
+        points 4
+        point[3] [ -1  0 ]
+        point[2] [ -1 -1 ]
+        point[1] [  1 -1 ]
+        point[0] [  1  0 ]
+
+        z [ 1  1.2 ]
+
+	color "yellow"
+    )
+    block
+    (
+        points 4
+        point[3] [ -4 -0.6 ]
+        point[2] [ -5 -0.6 ]
+        point[1] [  -5 -2.2 ]
+        point[0] [  -4 -2.2 ]
+
+        z [ 0  0.5 ]
+
+	color "blue"
+    )
+    block
+    (
+        points 4
+        point[3] [ 4 -0.6 ]
+        point[2] [ 5 -0.6 ]
+        point[1] [  5 -2.2 ]
+        point[0] [  4 -2.2 ]
+
+        z [ 0  0.5 ]
+
+	color "blue"
+    )
+
+    mass 5 # массу
+    gui_move 0 # возможность перемещать объект с помощью мыши
+)
+
+# add robot object # далее объявленный объект нужно создать, чем-то похоже на С++
+robot # добавить на карту объект типа робот
+(
+    name "actor" # имя объекта актер — имена должны быть уникальны
+    pose [ 0 0 0 0 ] # начальная позиция с учетом поворота
+    gui_move 1 # объект можно перетаскивать с помощью мышки
+)

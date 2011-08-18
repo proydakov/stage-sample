@@ -36,6 +36,9 @@ public:
         if(deltaPos < minimumDeltaPosition && deltaP < minimumDeltaPhi) {
             ++m_iteration;
         }
+        else {
+            m_iteration = 0;
+        }
         if(m_iteration >= m_crashIteration) {
             m_iteration = 0;
             qDebug() << "ROBOT CRASHED";

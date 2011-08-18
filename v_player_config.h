@@ -7,7 +7,7 @@
 
 #include <QString>
 
-const QString PLAYER_POLYGON_WORLD_CONFIG_FILE = "/home/evgeny/develop/stage_test/World/polygon.cfg";
-const QString PLAYER_SIMPLE_WORLD_CONFIG_FILE = "/home/evgeny/develop/stage_test/World/simple.cfg";
+const QString PLAYER_POLYGON_WORLD_CONFIG_FILE = "/home/evgeny/repository/stage_test/World/polygon.cfg";
+const QString PLAYER_SIMPLE_WORLD_CONFIG_FILE = "/home/evgeny/repository/stage_test/World/simple.cfg";
 
 #endif // _PLAYER_CONFIG_H_

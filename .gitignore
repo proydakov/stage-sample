@@ -19,6 +19,7 @@ actor.cbp
 *.cbp
 *.vpp~*
 player_config.h
+v_player_config.h
 *.vpp.bak
 project_config.h
 
